@@ -14,12 +14,12 @@ func main() {
 }
 
 func goWasmTest(this js.Value, args []js.Value) interface{} {
-	if len(args) == 1 && args[0].Type() == js.TypeFunction {
-		go func() {
-			time.Sleep(1 * time.Second)
-			args[0].Invoke("Message from goroutine delayed by a second")
-		}()
-		return js.Undefined()
+	if len(args) != 1 || args[0].Type() != js.TypeFunction {
+		return errors.New("Invalid argument")
 	}
-	return errors.New("argument is not a function")
+	go func() {
+		time.Sleep(1 * time.Second)
+		args[0].Invoke("Message from goroutine delayed by a second")
+	}()
+	return js.Undefined()
 }
