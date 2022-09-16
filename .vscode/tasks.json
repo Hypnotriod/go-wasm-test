@@ -24,6 +24,24 @@
             }
         },
         {
+            "label": "Tinygo build wasm",
+            "type": "shell",
+            "command": "tinygo",
+            "args": [
+                "build",
+                "-o",
+                "./public/test.wasm",
+                "-target",
+                "wasm",
+                "./cmd/wasm/main.go"
+            ],
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Go run file server",
             "type": "shell",
             "command": "go",
